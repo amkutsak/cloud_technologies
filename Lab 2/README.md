@@ -33,12 +33,46 @@ Werkzeug==2.0.1
 ```
 Теперь напишем код для плохого Dockerfile:
 ```
-FROM python:3.8
+FROM python:latest
 COPY requirements.txt /requirements.txt
 RUN pip install --no-cache-dir -r /requirements.txt
 COPY . /
 RUN pip install gunicorn
 EXPOSE 9090
 CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:9090", "app:app"]
-
 ```
+(так как контейнер собирался успешно, но не открывалась веб-страница, на основе ошибки, которую выводил терминал, мы сменили сервер на gunicorn, после этого файл успешно отображался в локальном хосте)
+
+Сделаем файл для хорошего Dockerfile:
+```
+FROM python:3.8
+WORKDIR /app
+COPY requirements.txt .
+COPY app.py .
+RUN pip install --no-cache-dir -r requirements.txt
+EXPOSE 8080
+CMD ["python", "app.py"]
+```
+Далее соберем Docker-контейнер:
+`
+docker build -t my-python-app-bad -f Dockerfile .
+`
+Терминал вывыдет информацию об успешной сборке контейнера:
+[img2]()
+И запустим с помощью следующей команды:
+`
+docker run -p 9090:9090 my-python-app-bad
+`
+[img3]()
+аналогично для хорошего докер файла:
+```
+docker build -t my-python-app-bad -f Dockerfile .
+docker run -p 9090:9090 my-python-app-bad
+```
+Вывод программы:
+[img3]()
+[img4]()
+
+Перейдя по ссылке веб-страница открывалась в браузере и выдавала вот такой результат:
+[img4]()
+[img5]()
