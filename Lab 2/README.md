@@ -57,7 +57,7 @@ CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:9090", "app:app"]
 docker build -t my-python-app-bad -f Dockerfile .
 `
 Терминал вывыдет информацию об успешной сборке контейнера:
-[img2](https://github.com/jon/coolproject/raw/master/image/image.png)
+[img2]()
 И запустим с помощью следующей команды:
 `
 docker run -p 9090:9090 my-python-app-bad
