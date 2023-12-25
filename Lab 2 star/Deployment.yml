@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: biba
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: lab2-star
+  template:
+    metadata:
+      labels:
+        components: lab2-star
+    spec:
+      containers:
+        - name: nginx-server
+          image: nginx
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
