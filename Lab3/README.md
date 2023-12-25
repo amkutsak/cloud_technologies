@@ -68,3 +68,6 @@ on:
 ![img2](https://github.com/amkutsak/cloud_technologies/blob/main/Lab3/images/2.jpg)
 Далее проверим наш образ в артефактах:
 ![img3](https://github.com/amkutsak/cloud_technologies/blob/main/Lab3/images/3.jpg)
+
+## Вывод:
+С помощью github actions была настроена автоматическую сборку и выгрузку docker образа в артефакты.
