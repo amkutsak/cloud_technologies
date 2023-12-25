@@ -57,24 +57,24 @@ CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:9090", "app:app"]
 docker build -t my-python-app-bad -f Dockerfile .
 `
 Терминал вывыдет информацию об успешной сборке контейнера:
-[img2]()
+![img1](https://github.com/amkutsak/cloud_technologies/blob/main/Lab%202/images/img1.png)
 И запустим с помощью следующей команды:
 `
 docker run -p 9090:9090 my-python-app-bad
 `
-[img3]()
+![img2](https://github.com/amkutsak/cloud_technologies/blob/main/Lab%202/images/img2.png)
 аналогично для хорошего докер файла:
 ```
 docker build -t my-python-app-bad -f Dockerfile .
 docker run -p 9090:9090 my-python-app-bad
 ```
 Вывод программы:
-[img3]()
-[img4]()
+![img3](https://github.com/amkutsak/cloud_technologies/blob/main/Lab%202/images/img3.png)
+![img4](https://github.com/amkutsak/cloud_technologies/blob/main/Lab%202/images/img4.png)
 
 Перейдя по ссылке веб-страница открывалась в браузере и выдавала вот такой результат:
-[img4]()
-[img5]()
+![img5](https://github.com/amkutsak/cloud_technologies/blob/main/Lab%202/images/img5.png)
+![img6](https://github.com/amkutsak/cloud_technologies/blob/main/Lab%202/images/img6.png)
 
 ## Сравнение докер файлов
 Далее будет проведено сравнение плохих и хороших практик при написании докер контейнеров, сверху будет плохая практика, ниже хорошая:
