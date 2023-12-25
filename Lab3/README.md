@@ -26,7 +26,7 @@ jobs:
       - name: build image and push
         uses: docker/build-push-action@v5
         with:
-          context: ./lab3
+          context: ./Lab3
           push: true
           tags: cloud_technologies/docker3:latest
 ```
