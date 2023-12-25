@@ -17,7 +17,7 @@ sudo mv minikube /usr/local/bin/
 ```
 ### Запускаем minikube:
 ```
-minikube start --driver=docker
+minikube start
 ```
 После запуска можно проверить ip кластера
 ![img1](https://github.com/amkutsak/cloud_technologies/blob/main/Lab%202%20star/images/img1.png)
@@ -61,11 +61,17 @@ spec:
   selector:
     components: lab2
 ```
-Запуск файла конфигурации `kubectl apply -f file.yml`
+Запуск файла конфигурации 
+```
+kubectl apply -f Deployment.yml
+kubectl apply -f Service.yml
+```
 ![img2](https://github.com/amkutsak/cloud_technologies/blob/main/Lab%202%20star/images/img2.png)
 ### Проверка
 1. Проверяем запущенные сервисы `kubectl get services`, на которых видимо порты нашего сервиса
-2. Проверяем статусы подов `kubectl get pods`
+![img3](https://github.com/amkutsak/cloud_technologies/blob/main/Lab%202%20star/images/img3.png)
+3. Проверяем статусы подов `kubectl get all`
+![img4](https://github.com/amkutsak/cloud_technologies/blob/main/Lab%202%20star/images/img4.png)
 ### Вывод результатов
 C помощью команды: `mimkube service boba --url` получаем адресс нашей страницы
 ![img5](https://github.com/amkutsak/cloud_technologies/blob/main/Lab%202%20star/images/img5.png)
