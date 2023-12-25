@@ -1,1 +1,26 @@
+name: Docker Image CI
 
+on: 
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      
+      - name: log in to docker hub 
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.LOGIN_DOCKER }}
+          password: ${{ secrets.PASSWORD_DOCKER }}
+
+      - name: build image and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: estle/dockerlab3:latest
