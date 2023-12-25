@@ -7,7 +7,7 @@
 ## Создание github action
 Внутри workflows сделаем файл Builder:
 ```
-name: Builder
+name: Docker Build
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Builder image
+    - name: Docker Build image
       run: docker build -t docker-image:latest .
 
     - name: Save Docker image as tar
@@ -35,9 +35,19 @@ jobs:
         path: docker-image.tar
 ```
 ## Разберем код:
+```
+on:
+  push:
+    branches:
+      - main
+```
+`on` : определяет события, при которых будет выполняться workflow. В данном случае запускается при каждом пуше.
+`jobs`: определяет список действий, которые должны выполниться в рамках workflow. В нашем случае у нас есть одно действие: `bild`
+`runs on`: указывает на операционную систему, в которой выполняется наш job.
+`steps`: определяет последовательность шагов, которые выполняются внутри действий.
 ## Проверка:
 Делаем пуш и проверим работает ли файл в репозитории на GitHub в разделе Actions. Видим, что файл успешно запустился:
-![img1]()
-![img2]()
+![img1](https://github.com/amkutsak/cloud_technologies/blob/main/Lab3/images/1.jpg)
+![img2](https://github.com/amkutsak/cloud_technologies/blob/main/Lab3/images/2.jpg)
 Далее проверим наш образ в артефактах:
-![img3]()
+![img3](https://github.com/amkutsak/cloud_technologies/blob/main/Lab3/images/3.jpg)
