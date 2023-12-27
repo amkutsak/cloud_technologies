@@ -38,7 +38,7 @@ COPY requirements.txt /requirements.txt
 RUN pip install --no-cache-dir -r /requirements.txt
 COPY . /
 EXPOSE 9090
-CMD ["python", "app.py"]
+CMD python app.py
 ```
 Сделаем файл для хорошего Dockerfile:
 ```
@@ -46,8 +46,7 @@ FROM python:3.8
 WORKDIR /app
 COPY requirements.txt .
 COPY app.py .
-RUN pip install gunicorn
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install gunicorn && pip install --no-cache-dir -r requirements.txt
 EXPOSE 8080
 CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:9090", "app:app"]
 (так как контейнер собирался успешно, но не открывалась веб-страница, на основе ошибки, которую выводил терминал, мы сменили сервер на gunicorn, после этого файл успешно отображался в локальном хосте)
@@ -81,9 +80,9 @@ docker run -p 9090:9090 my-python-app-bad
 ### 1. Использование конкретной версии
 Использование тега 'latest' не рекомендуется, так как это может привести к проблемам совместимости версий в будующем.
 ```
-# Используем устаревший образ Python
+# Использование тега latest
 FROM python:latest
-# Используем официальный образ Python
+# Использование конкретной версии
 FROM python:3.8
 ```
 ### 2. Копирование файлов в корень
@@ -95,12 +94,12 @@ COPY . /
 COPY requirements.txt .
 COPY app.py .
 ```
-### 3. Запуск через Gunicorn
-В произовдстве рекомендумается использовать Gunicorn вместо встроенных серверов Flask, возникают конфликты с серверами и разрешениями.
+### 3. Корректное использование CMD
+Не стоит использовать форму записи аргументов в виде списка (shell режим) - не дает гибко настраивать работу образа. Следует использовать массив: CMD ["arg1","arg2",...] - exec режим. Массив может состоять из команды и  её параметров, этот вариант написания является корректным.
 ```
-# Использование встроенных серверов Flask
-CMD ["python", "app.py"]
-# Использование Gunicorn
+# плохо
+CMD python app.py
+# хорошо
 CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:9090", "app:app"]
 ```
 ## Плохоие практики по использованию Docker-container.
